@@ -107,16 +107,16 @@ If you plan to upgrade your version, you need to modify a few files.
 1. Update version for "libgit2" in `env.sh`
 
   ~~~bash
-: ${LIBGIT2_TAG:=release-1.1}
+: ${LIBGIT2_TAG:=release-1.5}
   ~~~
 
 2. Update version of "git2go" in `go.mod`
 
   ~~~bash
   # [...]
-  github.com/libgit2/git2go/v31 v31.4.7
+  github.com/libgit2/git2go/v34 v34.0.0
   # [...]
-  replace github.com/libgit2/git2go/v31 => ./ext_deps/git2go
+  replace github.com/libgit2/git2go/v34 => ./ext_deps/git2go
   ~~~
 
 ## Copyright

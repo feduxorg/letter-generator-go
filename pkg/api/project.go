@@ -30,16 +30,6 @@ func NewProject(letters []letter.Letter, template converter.Template, assets []a
 func (p *Project) Build() error {
 	texFiles, err := generateTexFiles(p.template, p.letters)
 
-	defer func() {
-		log.WithFields(log.Fields{
-			"count(files)": len(texFiles),
-		}).Debug("Clean up after build")
-
-		for _, f := range texFiles {
-			f.Destroy()
-		}
-	}()
-
 	if err != nil {
 		return errors.Wrap(err, "generate tex file")
 	}
@@ -76,6 +66,16 @@ func (p *Project) Build() error {
 	log.WithFields(log.Fields{"count(letters)": len(files), "files": strings.Join(files, ",")}).Info("Generate letters")
 
 	return nil
+}
+
+func Destroy(texFiles []converter.TexFile) {
+	log.WithFields(log.Fields{
+		"count(files)": len(texFiles),
+	}).Debug("Clean up after build")
+
+	for _, f := range texFiles {
+		f.Destroy()
+	}
 }
 
 func generateTexFiles(template converter.Template, letters []letter.Letter) ([]converter.TexFile, error) {

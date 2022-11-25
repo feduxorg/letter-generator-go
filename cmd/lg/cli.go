@@ -142,6 +142,7 @@ func build(config letter_generator.Config) error {
 	err := builder.Build(config)
 
 	if err != nil {
+		log.Error(err.Error())
 		return err
 	}
 
